@@ -1,6 +1,6 @@
-[0m[[0m[33mwarn[0m] [0m[0m/Users/vinniebrice/induction/play-template/test/controllers/ApplicationControllerSpec.scala:96:7: Auto-application to `()` is deprecated. Supply the empty argument list `()` explicitly to invoke method beforeEach,[0m
-[0m[[0m[33mwarn[0m] [0m[0mor remove the empty argument list from its definition (Java-defined methods are exempt).[0m
-[0m[[0m[33mwarn[0m] [0m[0mIn Scala 3, an unapplied method like this will be eta-expanded into a function.[0m
-[0m[[0m[33mwarn[0m] [0m[0m      beforeEach[0m
-[0m[[0m[33mwarn[0m] [0m[0m      ^[0m
-[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/daniel.maltz/Desktop/play-template/test/controllers/ApplicationControllerSpec.scala:59:79: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : play.api.test.FakeRequest[play.api.libs.json.JsValue][0m
+[0m[[0m[31merror[0m] [0m[0m required: play.api.mvc.Request[play.api.mvc.AnyContent][0m
+[0m[[0m[31merror[0m] [0m[0m      val readResult: Future[Result] = TestApplicationController.read("abcd")(request)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                              ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

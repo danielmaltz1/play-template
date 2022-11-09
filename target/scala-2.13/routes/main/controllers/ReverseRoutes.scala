@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/Users/daniel.maltz/Desktop/play-template/conf/routes
-// @DATE:Tue Nov 08 09:00:30 GMT 2022
+// @DATE:Wed Nov 09 10:21:12 GMT 2022
 
 import play.api.mvc.Call
 
@@ -20,25 +20,25 @@ package controllers {
     // @LINE:11
     def read(id:String): Call = {
       
-      Call("GET", _prefix + { _defaultPrefix } + "read/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("id", id)))
+      Call("GET", _prefix + { _defaultPrefix } + "api/read/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("id", id)))
     }
   
     // @LINE:10
     def create(): Call = {
       
-      Call("GET", _prefix + { _defaultPrefix } + "create")
+      Call("POST", _prefix + { _defaultPrefix } + "api/create")
     }
   
     // @LINE:13
     def delete(id:String): Call = {
       
-      Call("GET", _prefix + { _defaultPrefix } + "delete/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("id", id)))
+      Call("DELETE", _prefix + { _defaultPrefix } + "api/delete/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("id", id)))
     }
   
     // @LINE:12
     def update(id:String): Call = {
       
-      Call("GET", _prefix + { _defaultPrefix } + "update/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("id", id)))
+      Call("PUT", _prefix + { _defaultPrefix } + "api/update/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("id", id)))
     }
   
     // @LINE:8

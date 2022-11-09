@@ -1,25 +1,14 @@
-[0m[[0m[31merror[0m] [0m[0mjava.io.IOException: Bad file descriptor[0m
-[0m[[0m[31merror[0m] [0m[0m	at java.base/java.io.FileInputStream.available0(Native Method)[0m
-[0m[[0m[31merror[0m] [0m[0m	at java.base/java.io.FileInputStream.available(FileInputStream.java:330)[0m
-[0m[[0m[31merror[0m] [0m[0m	at play.sbt.PlayConsoleInteractionMode$InputStreamWrapper.read(PlayInteractionMode.scala:64)[0m
-[0m[[0m[31merror[0m] [0m[0m	at jline.internal.NonBlockingInputStream.read(NonBlockingInputStream.java:245)[0m
-[0m[[0m[31merror[0m] [0m[0m	at jline.internal.InputStreamReader.read(InputStreamReader.java:257)[0m
-[0m[[0m[31merror[0m] [0m[0m	at jline.internal.InputStreamReader.read(InputStreamReader.java:194)[0m
-[0m[[0m[31merror[0m] [0m[0m	at jline.console.ConsoleReader.readCharacter(ConsoleReader.java:2151)[0m
-[0m[[0m[31merror[0m] [0m[0m	at jline.console.ConsoleReader.readCharacter(ConsoleReader.java:2141)[0m
-[0m[[0m[31merror[0m] [0m[0m	at play.sbt.PlayConsoleInteractionMode$.waitEOF$1(PlayInteractionMode.scala:99)[0m
-[0m[[0m[31merror[0m] [0m[0m	at play.sbt.PlayConsoleInteractionMode$.$anonfun$waitForKey$2(PlayInteractionMode.scala:110)[0m
-[0m[[0m[31merror[0m] [0m[0m	at play.sbt.PlayConsoleInteractionMode$.$anonfun$doWithoutEcho$1(PlayInteractionMode.scala:117)[0m
-[0m[[0m[31merror[0m] [0m[0m	at play.sbt.PlayConsoleInteractionMode$.$anonfun$doWithoutEcho$1$adapted(PlayInteractionMode.scala:114)[0m
-[0m[[0m[31merror[0m] [0m[0m	at play.sbt.PlayConsoleInteractionMode$.withConsoleReader(PlayInteractionMode.scala:93)[0m
-[0m[[0m[31merror[0m] [0m[0m	at play.sbt.PlayConsoleInteractionMode$.doWithoutEcho(PlayInteractionMode.scala:114)[0m
-[0m[[0m[31merror[0m] [0m[0m	at play.sbt.PlayConsoleInteractionMode$.$anonfun$waitForKey$1(PlayInteractionMode.scala:110)[0m
-[0m[[0m[31merror[0m] [0m[0m	at play.sbt.PlayConsoleInteractionMode$.$anonfun$waitForKey$1$adapted(PlayInteractionMode.scala:97)[0m
-[0m[[0m[31merror[0m] [0m[0m	at play.sbt.PlayConsoleInteractionMode$.withConsoleReader(PlayInteractionMode.scala:93)[0m
-[0m[[0m[31merror[0m] [0m[0m	at play.sbt.PlayConsoleInteractionMode$.waitForKey(PlayInteractionMode.scala:97)[0m
-[0m[[0m[31merror[0m] [0m[0m	at play.sbt.PlayConsoleInteractionMode$.waitForCancel(PlayInteractionMode.scala:121)[0m
-[0m[[0m[31merror[0m] [0m[0m	at play.sbt.run.PlayRun$.$anonfun$playRunTask$3(PlayRun.scala:121)[0m
-[0m[[0m[31merror[0m] [0m[0m	at play.sbt.run.PlayRun$.$anonfun$playRunTask$3$adapted(PlayRun.scala:67)[0m
+[0m[[0m[31merror[0m] [0m[0mscala.MatchError: org.apache.logging.log4j.simple.SimpleLoggerContext@54ebc9dd (of class org.apache.logging.log4j.simple.SimpleLoggerContext)[0m
+[0m[[0m[31merror[0m] [0m[0m	at sbt.util.LogExchange.logger(LogExchange.scala:28)[0m
+[0m[[0m[31merror[0m] [0m[0m	at sbt.internal.LogManager$.defaultLogger(LogManager.scala:136)[0m
+[0m[[0m[31merror[0m] [0m[0m	at sbt.internal.LogManager$DefaultLogManager.apply(LogManager.scala:103)[0m
+[0m[[0m[31merror[0m] [0m[0m	at sbt.internal.LogManager$.$anonfun$construct$1(LogManager.scala:51)[0m
+[0m[[0m[31merror[0m] [0m[0m	at sbt.std.Streams$$anon$2$$anon$3.log(Streams.scala:184)[0m
+[0m[[0m[31merror[0m] [0m[0m	at sbt.std.TaskStreams.log(Streams.scala:71)[0m
+[0m[[0m[31merror[0m] [0m[0m	at sbt.std.TaskStreams.log$(Streams.scala:71)[0m
+[0m[[0m[31merror[0m] [0m[0m	at sbt.std.Streams$$anon$2$$anon$3.log$lzycompute(Streams.scala:143)[0m
+[0m[[0m[31merror[0m] [0m[0m	at sbt.std.Streams$$anon$2$$anon$3.log(Streams.scala:143)[0m
+[0m[[0m[31merror[0m] [0m[0m	at sbt.coursierint.CoursierInputsTasks$.$anonfun$strictTask$1(CoursierInputsTasks.scala:243)[0m
 [0m[[0m[31merror[0m] [0m[0m	at scala.Function1.$anonfun$compose$1(Function1.scala:49)[0m
 [0m[[0m[31merror[0m] [0m[0m	at sbt.internal.util.$tilde$greater.$anonfun$$u2219$1(TypeFunctions.scala:62)[0m
 [0m[[0m[31merror[0m] [0m[0m	at sbt.std.Transform$$anon$4.work(Transform.scala:67)[0m
@@ -35,11 +24,4 @@
 [0m[[0m[31merror[0m] [0m[0m	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)[0m
 [0m[[0m[31merror[0m] [0m[0m	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)[0m
 [0m[[0m[31merror[0m] [0m[0m	at java.base/java.lang.Thread.run(Thread.java:834)[0m
-[0m[[0m[31merror[0m] [0m[0m(Compile / [31mrun[0m) java.io.IOException: Bad file descriptor[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/daniel.maltz/Desktop/play-template/app/controllers/ApplicationController.scala:41:30: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : scala.concurrent.Future[org.mongodb.scala.result.UpdateResult][0m
-[0m[[0m[31merror[0m] [0m[0m    (which expands to)  scala.concurrent.Future[com.mongodb.client.result.UpdateResult][0m
-[0m[[0m[31merror[0m] [0m[0m required: play.api.mvc.Action[play.api.mvc.AnyContent][0m
-[0m[[0m[31merror[0m] [0m[0m        dataRepository.update(id, value)[0m
-[0m[[0m[31merror[0m] [0m[0m                             ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0m([31mcsrConfiguration[0m) scala.MatchError: org.apache.logging.log4j.simple.SimpleLoggerContext@54ebc9dd (of class org.apache.logging.log4j.simple.SimpleLoggerContext)[0m

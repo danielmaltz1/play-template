@@ -5,7 +5,7 @@ import org.mongodb.scala.bson.conversions.Bson
 import org.mongodb.scala.model.Filters.empty
 import org.mongodb.scala.model._
 import org.mongodb.scala.result.UpdateResult
-import org.mongodb.scala.{SingleObservable, result}
+import org.mongodb.scala.{FindObservable, SingleObservable, result}
 import uk.gov.hmrc.mongo.MongoComponent
 import uk.gov.hmrc.mongo.play.json.PlayMongoRepository
 
@@ -43,12 +43,15 @@ class DataRepository @Inject()(
     }
 
   def update(id: String, book: DataModel): Future[UpdateResponse] = {
-    val ref: Future[UpdateResult] = collection.replaceOne(
-      filter = byID(id),
-      replacement = book,
-      options = new ReplaceOptions().upsert(true) //What happens when we set this to false?
-    ).toFuture()
-    ref.map(x => UpdateResponse(x.wasAcknowledged()))
+    if (id != book._id) {Future(UpdateResponse(false))}
+    else {
+      val ref: Future[UpdateResult] = collection.replaceOne(
+        filter = byID(id),
+        replacement = book,
+        options = new ReplaceOptions().upsert(true) //What happens when we set this to false?
+      ).toFuture()
+      ref.map(x => UpdateResponse(x.wasAcknowledged()))
+    }
   }
 
 
@@ -58,5 +61,10 @@ class DataRepository @Inject()(
     ).toFuture()
 
   def deleteAll(): Future[Unit] = collection.deleteMany(empty()).toFuture().map(_ => ()) //Hint: needed for tests
+
+  def findAll(): FindObservable[DataModel] = {
+    collection.find()
+
+  }
 
 }

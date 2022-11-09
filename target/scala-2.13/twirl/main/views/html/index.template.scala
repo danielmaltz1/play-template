@@ -31,7 +31,7 @@ Seq[Any](format.raw/*2.1*/("""
   <div class="jumbotron my-auto">
 
     <div class="container mb-5">
-      <h1 class="display-3 row">Play Scala API Demo</h1>
+      <h1 class="display-3 row">Play Scala API Demo. Welcome to Play! </h1>
     </div>
 
     <p class="lead">
@@ -121,10 +121,10 @@ Seq[Any](format.raw/*2.1*/("""
 
               /*
                   -- GENERATED --
-                  DATE: 2022-05-23T22:16:24.238
-                  SOURCE: /Users/vinniebrice/induction/play-template/app/views/index.scala.html
-                  HASH: 5497a12eba0b5213723c306a69b4918019aed905
-                  MATRIX: 722->1|818->4|845->6|880->33|919->35|947->37|3096->2156
+                  DATE: 2022-11-03T13:30:50.967431
+                  SOURCE: /Users/daniel.maltz/Desktop/play-template/app/views/index.scala.html
+                  HASH: 6a3afaf2e6578323ee8a5c6ea1ffc21b7cfe4b00
+                  MATRIX: 722->1|818->4|845->6|880->33|919->35|947->37|3115->2175
                   LINES: 21->1|26->2|27->3|27->3|27->3|29->5|107->83
                   -- GENERATED --
               */

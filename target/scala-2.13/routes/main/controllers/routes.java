@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/Users/daniel.maltz/Desktop/play-template/conf/routes
-// @DATE:Wed Nov 09 10:21:12 GMT 2022
+// @DATE:Wed Nov 16 09:32:44 GMT 2022
 
 package controllers;
 

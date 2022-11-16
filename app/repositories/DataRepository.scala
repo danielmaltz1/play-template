@@ -36,10 +36,19 @@ class DataRepository @Inject()(
       Filters.equal("_id", id)
     )
 
-  def read(id: String): Future[DataModel] =
+  def read(id: String): Future[Option[DataModel]] =
+    collection.find(byID(id)).headOption flatMap {
+      case Some(data) =>
+        Future(Some(data))
+      case None =>
+        Future(None)
+    }
+
+  def readStrictly(id: String): Future[DataModel] =
     collection.find(byID(id)).headOption flatMap {
       case Some(data) =>
         Future(data)
+
     }
 
   def update(id: String, book: DataModel): Future[UpdateResponse] = {

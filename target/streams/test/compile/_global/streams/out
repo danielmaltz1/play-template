@@ -1,4 +1,13 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/daniel.maltz/Desktop/play-template/test/controllers/ApplicationControllerSpec.scala:8:28: object Durations in package tools cannot be accessed as a member of package org.scalatest.tools from package controllers[0m
-[0m[[0m[31merror[0m] [0m[0mimport org.scalatest.tools.Durations.Duration[0m
-[0m[[0m[31merror[0m] [0m[0m                           ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[33mwarn[0m] [0m[0m/Users/daniel.maltz/Desktop/play-template/test/services/LibraryServiceSpec.scala:59:25: adaptation of an empty argument list by inserting () is deprecated: this is unlikely to be what you want[0m
+[0m[[0m[33mwarn[0m] [0m[0m        signature: Either.getOrElse[B1 >: B](or: => B1): B1[0m
+[0m[[0m[33mwarn[0m] [0m[0m  given arguments: <none>[0m
+[0m[[0m[33mwarn[0m] [0m[0m after adaptation: Either.getOrElse((): Unit)[0m
+[0m[[0m[33mwarn[0m] [0m[0m        result.getOrElse() shouldBe gameOfThrones.as[Book][0m
+[0m[[0m[33mwarn[0m] [0m[0m                        ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/Users/daniel.maltz/Desktop/play-template/test/services/LibraryServiceSpec.scala:72:25: adaptation of an empty argument list by inserting () is deprecated: this is unlikely to be what you want[0m
+[0m[[0m[33mwarn[0m] [0m[0m        signature: Either.getOrElse[B1 >: B](or: => B1): B1[0m
+[0m[[0m[33mwarn[0m] [0m[0m  given arguments: <none>[0m
+[0m[[0m[33mwarn[0m] [0m[0m after adaptation: Either.getOrElse((): Unit)[0m
+[0m[[0m[33mwarn[0m] [0m[0m        result.getOrElse() shouldBe APIError.BadAPIResponse[0m
+[0m[[0m[33mwarn[0m] [0m[0m                        ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mtwo warnings found[0m

@@ -1,0 +1,30 @@
+@(model: Option[DataModel])
+@main("Find Book")(model){
+<h1>Google Book Api Project</h1>
+
+<body>
+
+<div class="justify-content-center">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">id     </th>
+            <th scope="col">name     </th>
+            <th scope="col">description     </th>
+            <th scope="col">number of sales     </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">@model.get._id</th>
+            <td>@model.get.name</td>
+            <td>@model.get.description</td>
+            <td>@model.get.numSales</td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+</body>
+}

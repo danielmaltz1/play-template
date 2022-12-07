@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/Users/daniel.maltz/Desktop/play-template/conf/routes
-// @DATE:Wed Nov 09 10:21:12 GMT 2022
+// @DATE:Wed Dec 07 10:10:21 GMT 2022
 
 import play.api.routing.JavaScriptReverseRoute
 
@@ -34,6 +34,36 @@ package controllers.javascript {
       """
         function() {
           return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "api/create"})
+        }
+      """
+    )
+  
+    // @LINE:17
+    def getGoogleBook: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.ApplicationController.getGoogleBook",
+      """
+        function(search0,term1) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "library/google/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("search", search0)) + "/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("term", term1))})
+        }
+      """
+    )
+  
+    // @LINE:15
+    def updateByField: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.ApplicationController.updateByField",
+      """
+        function(id0,field1,newValue2) {
+          return _wA({method:"PUT", url:"""" + _prefix + { _defaultPrefix } + """" + "api/updateByField/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("id", id0)) + "/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("field", field1)) + "/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("newValue", newValue2))})
+        }
+      """
+    )
+  
+    // @LINE:19
+    def example: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.ApplicationController.example",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "example"})
         }
       """
     )

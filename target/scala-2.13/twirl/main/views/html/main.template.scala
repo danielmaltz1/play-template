@@ -15,7 +15,7 @@ import play.api.templates.PlayMagic._
 import play.api.mvc._
 import play.api.data._
 
-object main extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template2[String,Html,play.twirl.api.HtmlFormat.Appendable] {
+object main extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template3[String,Option[DataModel],Html,play.twirl.api.HtmlFormat.Appendable] {
 
   /*
  * This template is called from the `index` template. This template
@@ -23,7 +23,7 @@ object main extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlF
  * two arguments, a `String` for the title of the page and an `Html`
  * object to insert into the body of the page.
  */
-  def apply/*7.2*/(title: String)(content: Html):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*7.2*/(title: String)(model: Option[DataModel])(content: Html):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
@@ -34,7 +34,7 @@ Seq[Any](format.raw/*8.1*/("""
     <head>
         """),format.raw/*12.62*/("""
         """),format.raw/*13.9*/("""<title>"""),_display_(/*13.17*/title),format.raw/*13.22*/("""</title>
-        <link rel="stylesheet" media="screen" href=""""),_display_(/*14.54*/routes/*14.60*/.Assets.versioned("stylesheets/main.css")),format.raw/*14.101*/("""">
+        <link rel="stylesheet" type="text/css" media="screen" href=""""),_display_(/*14.70*/routes/*14.76*/.Assets.versioned("/stylesheets/main.css")),format.raw/*14.118*/("""">
         <link rel="shortcut icon" type="image/png" href=""""),_display_(/*15.59*/routes/*15.65*/.Assets.versioned("images/favicon.png")),format.raw/*15.104*/("""">
 
     </head>
@@ -50,9 +50,9 @@ Seq[Any](format.raw/*8.1*/("""
     }
   }
 
-  def render(title:String,content:Html): play.twirl.api.HtmlFormat.Appendable = apply(title)(content)
+  def render(title:String,model:Option[DataModel],content:Html): play.twirl.api.HtmlFormat.Appendable = apply(title)(model)(content)
 
-  def f:((String) => (Html) => play.twirl.api.HtmlFormat.Appendable) = (title) => (content) => apply(title)(content)
+  def f:((String) => (Option[DataModel]) => (Html) => play.twirl.api.HtmlFormat.Appendable) = (title) => (model) => (content) => apply(title)(model)(content)
 
   def ref: this.type = this
 
@@ -61,10 +61,10 @@ Seq[Any](format.raw/*8.1*/("""
 
               /*
                   -- GENERATED --
-                  DATE: 2022-11-03T11:48:22.433102
+                  DATE: 2022-12-07T10:04:40.715769
                   SOURCE: /Users/daniel.maltz/Desktop/play-template/app/views/main.scala.html
-                  HASH: 52352176f1a784d96e62964e439264b508b87d6f
-                  MATRIX: 987->260|1111->291|1138->292|1218->397|1254->406|1289->414|1315->419|1404->481|1419->487|1482->528|1570->589|1585->595|1646->634|1709->759|1746->769|1774->776|1809->784|1850->798|1865->804|1926->844
+                  HASH: bc5a5ee0a0b194af69b84c0791120db946a60aed
+                  MATRIX: 1005->260|1155->317|1182->318|1262->423|1298->432|1333->440|1359->445|1464->523|1479->529|1543->571|1631->632|1646->638|1707->677|1770->802|1807->812|1835->819|1870->827|1911->841|1926->847|1987->887
                   LINES: 26->7|31->8|32->9|35->12|36->13|36->13|36->13|37->14|37->14|37->14|38->15|38->15|38->15|42->20|43->21|43->21|45->23|45->23|45->23|45->23
                   -- GENERATED --
               */

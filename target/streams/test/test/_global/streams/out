@@ -1,15 +1,15 @@
 [0m[[0m[0mdebug[0m] [0m[0mjavaOptions: Vector()[0m
 [0m[[0m[0mdebug[0m] [0m[0mForking tests - parallelism = false[0m
 [0m[[0m[0mdebug[0m] [0m[0mCreate a single-thread test executor[0m
-[0m[[0m[0mdebug[0m] [0m[0mRunner for org.scalatest.tools.Framework produced 2 initial tasks for 2 tests.[0m
-[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(controllers.HomeControllerSpec, sbt.ForkMain$SubclassFingerscan@35af34ef, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunner for org.scalatest.tools.Framework produced 4 initial tasks for 4 tests.[0m
+[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(controllers.HomeControllerSpec, sbt.ForkMain$SubclassFingerscan@63978c15, false, [SuiteSelector])[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mHomeControllerSpec:[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mHomeController GET[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should render the index page from a new instance of controller[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should render the index page from the application[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should render the index page from the router[0m[0m
 [0m[[0m[0mdebug[0m] [0m[0m    Produced 0 nested tasks and 3 events.[0m
-[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(controllers.ApplicationControllerSpec, sbt.ForkMain$SubclassFingerscan@61f5e88a, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(controllers.ApplicationControllerSpec, sbt.ForkMain$SubclassFingerscan@2c680369, false, [SuiteSelector])[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mApplicationControllerSpec:[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mApplicationController .index[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should return Ok[0m[0m
@@ -19,26 +19,53 @@
 [0m[[0m[0minfo[0m] [0m[0m[32mApplicationController .read[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should find a book in the database by id[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should produce a bad request if no valid data[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mApplicationController .readByName()[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should find a book by its name[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mApplicationController .readByCopies[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should return all books with more than 50 copies[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mApplicationController .update()[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should update a book by id[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should produce a bad request if bad update data[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should produce a bad request if no such data to update[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mApplicationController .updateByField[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should return a DataModel with a changed name[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should return a DataModel with more copies sold[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mApplicationController .delete()[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should delete by id[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should return bad request if no such id[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32mbeforeEach [0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32m- should produce an empty collection[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32m- should definitely delete everything[0m[0m
-[0m[[0m[0mdebug[0m] [0m[0m    Produced 0 nested tasks and 12 events.[0m
+[0m[[0m[0mdebug[0m] [0m[0m    Produced 0 nested tasks and 14 events.[0m
+[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(repositories.RepositorySpec, sbt.ForkMain$SubclassFingerscan@49f0fc4, false, [SuiteSelector])[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mRepositorySpec:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mcreate[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should create a book[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should return an error[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mread[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should return a book[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should throw an error[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mupdate[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should return true (updated)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should return false (not updated)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mdelete[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should not throw an error[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should throw an error[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0m    Produced 0 nested tasks and 8 events.[0m
+[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(services.LibraryServiceSpec, sbt.ForkMain$SubclassFingerscan@4225c55b, false, [SuiteSelector])[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mLibraryServiceSpec:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mgetGoogleBook[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should return a book[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should return an error[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0m    Produced 0 nested tasks and 2 events.[0m
 [0m[[0m[0mdebug[0m] [0m[0mRunner for com.novocode.junit.JUnitFramework produced 0 initial tasks for 0 tests.[0m
 [0m[[0m[0minfo[0m] [0m[0mScalaTest[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 7 seconds, 962 milliseconds.[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 15[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 2, aborted 0[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 15, failed 0, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 9 seconds, 215 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 27[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 4, aborted 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 27, failed 0, canceled 0, ignored 0, pending 0[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mAll tests passed.[0m[0m
 [0m[[0m[0mdebug[0m] [0m[0mSummary for JUnit not available.[0m
-[0m[[0m[0minfo[0m] [0m[0mPassed: Total 15, Failed 0, Errors 0, Passed 15[0m
+[0m[[0m[0minfo[0m] [0m[0mPassed: Total 27, Failed 0, Errors 0, Passed 27[0m
 [0m[[0m[0mdebug[0m] [0m[0mPassed tests:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	controllers.ApplicationControllerSpec[0m
 [0m[[0m[0mdebug[0m] [0m[0m	controllers.HomeControllerSpec[0m
+[0m[[0m[0mdebug[0m] [0m[0m	services.LibraryServiceSpec[0m
+[0m[[0m[0mdebug[0m] [0m[0m	repositories.RepositorySpec[0m

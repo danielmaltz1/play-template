@@ -1,23 +1,23 @@
 package controllers
 
+
 import play.api.test.FakeRequest
 import play.api.http.Status
 import baseSpec.BaseSpecWithApplication
 import models._
-import org.mongodb.scala.FindObservable
-import play.api.libs.json.{JsArray, JsObject, JsValue, Json}
-import play.api.mvc.{Action, AnyContent, Result}
+import play.api.libs.json.{JsValue, Json}
+import play.api.mvc.Result
 import play.api.test.Helpers.{contentAsJson, defaultAwaitTimeout, status}
 
-import java.util.concurrent.TimeUnit
-import scala.concurrent.duration.Duration
-import scala.concurrent.{Await, ExecutionContext, Future}
-import scala.util.Success
+import scala.concurrent.duration.{Duration, MILLISECONDS}
+import scala.concurrent.{Await, Future}
 
 class ApplicationControllerSpec extends BaseSpecWithApplication {
 
   val TestApplicationController = new ApplicationController(
     repository,
+    service,
+    repoService,
     component
   )
 
@@ -27,6 +27,21 @@ class ApplicationControllerSpec extends BaseSpecWithApplication {
     "test description",
     100
   )
+
+  private val smallDataModel: DataModel = DataModel(
+    "a",
+    "small test name",
+    "small test description",
+    10
+  )
+
+  private val bigDataModel: DataModel = DataModel(
+    "abcdefg",
+    "big test name",
+    "big test description",
+    400
+  )
+
 
 
   "ApplicationController .index" should {
@@ -93,10 +108,57 @@ class ApplicationControllerSpec extends BaseSpecWithApplication {
       status(createdResult) shouldBe Status.CREATED
       //Hint: You could use status(createdResult) shouldBe Status.CREATED to check this has worked again
 
-      val readResult: Future[Result] = TestApplicationController.read("abd")(FakeRequest())
+      assertThrows[Exception]{Await.result(TestApplicationController.read("abd")(FakeRequest()), Duration(100,MILLISECONDS))}
 
-      status(readResult) shouldBe Status.BAD_REQUEST
+      //val redResult = TestApplicationController.read("abd")(FakeRequest())
+      //status(redResult) shouldBe Status.BAD_REQUEST
 
+      afterEach()
+    }
+  }
+
+  "ApplicationController .readByName()" should{
+
+    "find a book by its name" in {
+      beforeEach()
+      val request: FakeRequest[JsValue] = buildGet("/api/${dataModel._id}").withBody[JsValue](Json.toJson(dataModel))
+      val createdResult: Future[Result] = TestApplicationController.create()(request) //wait
+
+      //Hint: You could use status(createdResult) shouldBe Status.CREATED to check this has worked again
+      status(createdResult) shouldBe Status.CREATED
+
+      val readResult: Future[Result] = TestApplicationController.readByName("test name")(FakeRequest())
+
+      status(readResult) shouldBe Status.OK
+      contentAsJson(readResult).as[JsValue] shouldBe Json.toJson(dataModel)
+
+      afterEach()
+    }
+  }
+
+  "ApplicationController .readByCopies" should{
+    "return all books with more than 50 copies" in {
+      beforeEach()
+      val request: FakeRequest[JsValue] = buildGet("/api/${dataModel._id}").withBody[JsValue](Json.toJson(dataModel))
+      val createdResult: Future[Result] = TestApplicationController.create()(request) //wait
+
+      val bigrequest: FakeRequest[JsValue] = buildGet("/api/${dataModel._id}").withBody[JsValue](Json.toJson(bigDataModel))
+      val bigcreatedResult: Future[Result] = TestApplicationController.create()(bigrequest) //wait
+
+      val smallrequest: FakeRequest[JsValue] = buildGet("/api/${dataModel._id}").withBody[JsValue](Json.toJson(smallDataModel))
+      val smallcreatedResult: Future[Result] = TestApplicationController.create()(smallrequest) //wait
+
+      //Hint: You could use status(createdResult) shouldBe Status.CREATED to check this has worked again
+      status(createdResult) shouldBe Status.CREATED
+      status(bigcreatedResult) shouldBe Status.CREATED
+      status(smallcreatedResult) shouldBe Status.CREATED
+
+      Thread.sleep(100)
+
+      val readResult: Future[Result] = TestApplicationController.readByCopies(x => x.numSales > 50)(FakeRequest())
+
+      status(readResult) shouldBe Status.OK
+      contentAsJson(readResult).as[JsValue] shouldBe Json.toJson(Seq(dataModel, bigDataModel))
       afterEach()
     }
   }
@@ -108,7 +170,7 @@ class ApplicationControllerSpec extends BaseSpecWithApplication {
 
       val request: FakeRequest[JsValue] = buildGet("/api/${dataModel._id}").withBody[JsValue](Json.toJson(dataModel))
       val createdResult: Future[Result] = TestApplicationController.create()(request)
-      status(createdResult) shouldBe Status.CREATED
+      status(createdResult) shouldBe Status.CREATED; Thread.sleep(100)
 
       val updateResult: Future[Result] = TestApplicationController.update("abcd")(request)
       status(updateResult) shouldBe Status.ACCEPTED
@@ -143,6 +205,34 @@ class ApplicationControllerSpec extends BaseSpecWithApplication {
     }
   }
 
+  "ApplicationController .updateByField" should {
+    "return a DataModel with a changed name" in{
+      beforeEach()
+
+      val request: FakeRequest[JsValue] = buildGet("/api/${dataModel._id}").withBody[JsValue](Json.toJson(dataModel))
+      val createdResult: Future[Result] = TestApplicationController.create()(request)
+      status(createdResult) shouldBe Status.CREATED
+
+      val updateResult: Future[Result] = TestApplicationController.updateByField("abcd","name", "testnamezzz")(request)
+
+      status(updateResult) shouldBe Status.ACCEPTED
+
+      afterEach()
+    }
+
+    "return a DataModel with more copies sold" in {
+      beforeEach()
+
+      val request: FakeRequest[JsValue] = buildGet("/api/${dataModel._id}").withBody[JsValue](Json.toJson(dataModel))
+      val createdResult: Future[Result] = TestApplicationController.create()(request)
+      status(createdResult) shouldBe Status.CREATED
+
+      val updateResult: Future[Result] = TestApplicationController.updateByField("abcd", "numSales", "103")(request)
+      status(updateResult) shouldBe Status.ACCEPTED
+      afterEach()
+    }
+  }
+
   "ApplicationController .delete()" should {
 
     "delete by id" in {
@@ -166,16 +256,14 @@ class ApplicationControllerSpec extends BaseSpecWithApplication {
       val createdResult: Future[Result] = TestApplicationController.create()(request)
       status(createdResult) shouldBe Status.CREATED
 
-      val deleteResult: Future[Result] = TestApplicationController.delete("ad")(FakeRequest())
-
-      status(deleteResult) shouldBe Status.BAD_REQUEST
+      assertThrows[Exception]{Await.result(TestApplicationController.delete("ad")(FakeRequest()), Duration(100,MILLISECONDS))}
 
 
       afterEach()
     }
   }
 
-  "beforeEach " should {
+  /*"beforeEach " should {
     "produce an empty collection" in {
       beforeEach()
       Await.result( repository.findAll().headOption(), Duration(5, TimeUnit.SECONDS)) shouldBe None
@@ -189,15 +277,16 @@ class ApplicationControllerSpec extends BaseSpecWithApplication {
       status(createdResult) shouldBe Status.CREATED
 
       beforeEach()
+      //Await.wait(500)
       Await.result( repository.findAll().headOption(), Duration(5, TimeUnit.SECONDS)) shouldBe None
 
       afterEach()
     }
-  }
+  }*/
 
 
-  override def beforeEach(): Unit = repository.deleteAll()
+  override def beforeEach(): Unit = repository.deleteAll(); Thread.sleep(100)
 
-  override def afterEach(): Unit = repository.deleteAll()
+  override def afterEach(): Unit = repository.deleteAll(); Thread.sleep(100)
 
 }

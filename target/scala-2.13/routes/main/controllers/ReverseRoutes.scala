@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/Users/daniel.maltz/Desktop/play-template/conf/routes
-// @DATE:Wed Nov 16 09:32:44 GMT 2022
+// @DATE:Wed Dec 07 10:10:21 GMT 2022
 
 import play.api.mvc.Call
 
@@ -38,7 +38,13 @@ package controllers {
     // @LINE:15
     def updateByField(id:String, field:String, newValue:String): Call = {
       
-      Call("PUT", _prefix + { _defaultPrefix } + "api/updateField/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("id", id)) + "/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("field", field)) + "/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("newValue", newValue)))
+      Call("PUT", _prefix + { _defaultPrefix } + "api/updateByField/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("id", id)) + "/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("field", field)) + "/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("newValue", newValue)))
+    }
+  
+    // @LINE:19
+    def example(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "example")
     }
   
     // @LINE:13

@@ -1,26 +1,23 @@
 package controllers
 
-import akka.util.ByteString
+
 import play.api.test.FakeRequest
 import play.api.http.Status
 import baseSpec.BaseSpecWithApplication
 import models._
-import org.mongodb.scala.FindObservable
-import play.api.libs.json.{JsArray, JsObject, JsValue, Json}
-import play.api.libs.streams.Accumulator
-import play.api.mvc.{Action, AnyContent, Result}
+import play.api.libs.json.{JsValue, Json}
+import play.api.mvc.Result
 import play.api.test.Helpers.{contentAsJson, defaultAwaitTimeout, status}
 
-import java.util.concurrent.TimeUnit
-import scala.concurrent.duration.{Duration, SECONDS}
-import scala.concurrent.{Await, ExecutionContext, Future}
-import scala.util.Success
+import scala.concurrent.duration.{Duration, MILLISECONDS}
+import scala.concurrent.{Await, Future}
 
 class ApplicationControllerSpec extends BaseSpecWithApplication {
 
   val TestApplicationController = new ApplicationController(
     repository,
     service,
+    repoService,
     component
   )
 
@@ -45,19 +42,6 @@ class ApplicationControllerSpec extends BaseSpecWithApplication {
     400
   )
 
-  private val changedNameDataModel: DataModel = DataModel(
-    "abcd",
-    "test namezzz",
-    "test description",
-    100
-  )
-
-  private val changedCopiesDataModel: DataModel = DataModel(
-    "abcd",
-    "test name",
-    "test description",
-    103
-  )
 
 
   "ApplicationController .index" should {
@@ -124,9 +108,10 @@ class ApplicationControllerSpec extends BaseSpecWithApplication {
       status(createdResult) shouldBe Status.CREATED
       //Hint: You could use status(createdResult) shouldBe Status.CREATED to check this has worked again
 
-      val readResult: Future[Result] = TestApplicationController.read("abd")(FakeRequest())
+      assertThrows[Exception]{Await.result(TestApplicationController.read("abd")(FakeRequest()), Duration(100,MILLISECONDS))}
 
-      status(readResult) shouldBe Status.BAD_REQUEST
+      //val redResult = TestApplicationController.read("abd")(FakeRequest())
+      //status(redResult) shouldBe Status.BAD_REQUEST
 
       afterEach()
     }
@@ -168,11 +153,12 @@ class ApplicationControllerSpec extends BaseSpecWithApplication {
       status(bigcreatedResult) shouldBe Status.CREATED
       status(smallcreatedResult) shouldBe Status.CREATED
 
+      Thread.sleep(100)
+
       val readResult: Future[Result] = TestApplicationController.readByCopies(x => x.numSales > 50)(FakeRequest())
 
       status(readResult) shouldBe Status.OK
       contentAsJson(readResult).as[JsValue] shouldBe Json.toJson(Seq(dataModel, bigDataModel))
-
       afterEach()
     }
   }
@@ -270,9 +256,7 @@ class ApplicationControllerSpec extends BaseSpecWithApplication {
       val createdResult: Future[Result] = TestApplicationController.create()(request)
       status(createdResult) shouldBe Status.CREATED
 
-      val deleteResult: Future[Result] = TestApplicationController.delete("ad")(FakeRequest())
-
-      status(deleteResult) shouldBe Status.BAD_REQUEST
+      assertThrows[Exception]{Await.result(TestApplicationController.delete("ad")(FakeRequest()), Duration(100,MILLISECONDS))}
 
 
       afterEach()

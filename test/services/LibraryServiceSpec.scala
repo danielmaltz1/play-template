@@ -4,20 +4,11 @@ import baseSpec.BaseSpec
 import cats.data.EitherT
 import connectors.LibraryConnector
 import models._
-import org.scalamock.handlers.CallHandler3
 import org.scalamock.scalatest.MockFactory
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
-import play.api.mvc.ControllerComponents
-import play.api.test.Helpers._
-import play.api.test._
-import play.api.libs.json.{JsArray, JsObject, JsValue, Json, OFormat}
-import play.api.mvc.Results.Status
-import sun.awt.image.DataBufferNative
-
-import java.util.concurrent.TimeUnit
-import scala.concurrent.duration.Duration
-import scala.concurrent.{Await, ExecutionContext, Future}
+import play.api.libs.json.{JsValue, Json, OFormat}
+import scala.concurrent.ExecutionContext
 
 class LibraryServiceSpec extends BaseSpec with MockFactory with ScalaFutures with GuiceOneAppPerSuite {
 

@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/Users/daniel.maltz/Desktop/play-template/conf/routes
-// @DATE:Wed Nov 16 09:32:44 GMT 2022
+// @DATE:Wed Dec 07 10:10:21 GMT 2022
 
 import play.api.routing.JavaScriptReverseRoute
 
@@ -53,7 +53,17 @@ package controllers.javascript {
       "controllers.ApplicationController.updateByField",
       """
         function(id0,field1,newValue2) {
-          return _wA({method:"PUT", url:"""" + _prefix + { _defaultPrefix } + """" + "api/updateField/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("id", id0)) + "/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("field", field1)) + "/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("newValue", newValue2))})
+          return _wA({method:"PUT", url:"""" + _prefix + { _defaultPrefix } + """" + "api/updateByField/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("id", id0)) + "/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("field", field1)) + "/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("newValue", newValue2))})
+        }
+      """
+    )
+  
+    // @LINE:19
+    def example: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.ApplicationController.example",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "example"})
         }
       """
     )

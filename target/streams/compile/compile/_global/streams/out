@@ -1,15 +1,6 @@
-[0m[[0m[33mwarn[0m] [0m[0m/Users/daniel.maltz/Desktop/play-template/app/repositories/DataRepository.scala:40:31: Auto-application to `()` is deprecated. Supply the empty argument list `()` explicitly to invoke method headOption,[0m
-[0m[[0m[33mwarn[0m] [0m[0mor remove the empty argument list from its definition (Java-defined methods are exempt).[0m
-[0m[[0m[33mwarn[0m] [0m[0mIn Scala 3, an unapplied method like this will be eta-expanded into a function.[0m
-[0m[[0m[33mwarn[0m] [0m[0m    collection.find(byID(id)).headOption flatMap {[0m
-[0m[[0m[33mwarn[0m] [0m[0m                              ^[0m
-[0m[[0m[33mwarn[0m] [0m[0m/Users/daniel.maltz/Desktop/play-template/app/repositories/DataRepository.scala:48:31: Auto-application to `()` is deprecated. Supply the empty argument list `()` explicitly to invoke method headOption,[0m
-[0m[[0m[33mwarn[0m] [0m[0mor remove the empty argument list from its definition (Java-defined methods are exempt).[0m
-[0m[[0m[33mwarn[0m] [0m[0mIn Scala 3, an unapplied method like this will be eta-expanded into a function.[0m
-[0m[[0m[33mwarn[0m] [0m[0m    collection.find(byID(id)).headOption flatMap {[0m
-[0m[[0m[33mwarn[0m] [0m[0m                              ^[0m
-[0m[[0m[33mwarn[0m] [0m[0m/Users/daniel.maltz/Desktop/play-template/app/repositories/DataRepository.scala:48:50: match may not be exhaustive.[0m
-[0m[[0m[33mwarn[0m] [0m[0mIt would fail on the following input: None[0m
-[0m[[0m[33mwarn[0m] [0m[0m    collection.find(byID(id)).headOption flatMap {[0m
-[0m[[0m[33mwarn[0m] [0m[0m                                                 ^[0m
-[0m[[0m[33mwarn[0m] [0m[0mthree warnings found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/daniel.maltz/Desktop/play-template/app/controllers/ApplicationController.scala:40:85: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : models.DataModel[0m
+[0m[[0m[31merror[0m] [0m[0m required: Option[models.DataModel][0m
+[0m[[0m[31merror[0m] [0m[0m    booksWithCorrectId.map { x => val ref = Future.successful(Ok(views.html.example(x)))  ;Ok(Json.toJson(x))}[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

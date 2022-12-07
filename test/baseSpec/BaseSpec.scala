@@ -1,6 +1,7 @@
 package baseSpec
 
-import repositories.DataRepository
+import repositories.{DataRepository, OverarchingDataRepository}
+import services._
 import akka.stream.Materializer
 import connectors.LibraryConnector
 import org.scalatest.concurrent.{Eventually, ScalaFutures}
@@ -16,7 +17,6 @@ import play.api.mvc.{AnyContentAsEmpty, MessagesControllerComponents}
 import play.api.test.CSRFTokenHelper.CSRFFRequestHeader
 import play.api.test.FakeRequest
 import play.api.test.Helpers.{GET, POST}
-import services.LibraryService
 
 import scala.concurrent.ExecutionContext
 
@@ -31,6 +31,8 @@ trait BaseSpecWithApplication extends BaseSpec with GuiceOneServerPerSuite with 
   lazy val repository: DataRepository = injector.instanceOf[DataRepository]
   lazy val service: LibraryService = injector.instanceOf[LibraryService]
   lazy val connector: LibraryConnector = injector.instanceOf[LibraryConnector]
+  lazy val repoService: RepositoryService = injector.instanceOf[RepositoryService]
+  lazy val overarchingDataRepository: OverarchingDataRepository = injector.instanceOf[OverarchingDataRepository]
 
   implicit val messagesApi: MessagesApi = app.injector.instanceOf[MessagesApi]
   lazy val injector: Injector = app.injector

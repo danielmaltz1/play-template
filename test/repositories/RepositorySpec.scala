@@ -84,7 +84,7 @@ class RepositorySpec extends BaseSpecWithApplication with MockFactory with Scala
       (mockRepository.read(_:String)).expects(*).returning(Future(Right(model)))
       (mockRepository.delete(_: String)).expects(*).returning(Future(yes))
 
-      //assertThrows[Exception]{testService.delete("")}
+      testService.delete("")
     }
     "throw an error" in {
       (mockRepository.read(_:String)).expects(*).returning(Future(Right(model)))

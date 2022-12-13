@@ -6,11 +6,12 @@ import play.api.http.Status
 import baseSpec.BaseSpecWithApplication
 import models._
 import play.api.libs.json.{JsValue, Json}
-import play.api.mvc.Result
+import play.api.mvc.{Action, AnyContent, Result}
 import play.api.test.Helpers.{contentAsJson, defaultAwaitTimeout, status}
 
 import scala.concurrent.duration.{Duration, MILLISECONDS}
 import scala.concurrent.{Await, Future}
+import play.api.test.CSRFTokenHelper._
 
 class ApplicationControllerSpec extends BaseSpecWithApplication {
 
@@ -258,6 +259,28 @@ class ApplicationControllerSpec extends BaseSpecWithApplication {
 
       assertThrows[Exception]{Await.result(TestApplicationController.delete("ad")(FakeRequest()), Duration(100,MILLISECONDS))}
 
+
+      afterEach()
+    }
+  }
+
+  "addBookForm" should{
+    "return ok" in {
+      beforeEach()
+      //val request = buildGet("/newBook/form").withBody[JsValue](Json.toJson(dataModel)).withCSRFToken
+      val request = FakeRequest().withCSRFToken
+      val done = TestApplicationController.addBookForm()(request)
+      status(done) shouldBe Status.OK
+
+      afterEach()
+    }
+
+    "return bad request" in {
+      beforeEach()
+
+      val request: FakeRequest[JsValue] = buildGet("/api/${dataModel._id}").withBody[JsValue](Json.toJson("dataModel"))
+      val done = TestApplicationController.addBookForm()(request)
+      status(done) shouldBe Status.BAD_REQUEST
 
       afterEach()
     }

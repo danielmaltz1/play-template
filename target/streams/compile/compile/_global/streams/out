@@ -1,6 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/daniel.maltz/Desktop/play-template/app/controllers/ApplicationController.scala:40:85: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : models.DataModel[0m
-[0m[[0m[31merror[0m] [0m[0m required: Option[models.DataModel][0m
-[0m[[0m[31merror[0m] [0m[0m    booksWithCorrectId.map { x => val ref = Future.successful(Ok(views.html.example(x)))  ;Ok(Json.toJson(x))}[0m
-[0m[[0m[31merror[0m] [0m[0m                                                                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/daniel.maltz/Desktop/play-template/app/controllers/ApplicationController.scala:151:62: type Token is not a member of object views.html.helper.CSRF[0m
+[0m[[0m[31merror[0m] [0m[0m  def accessToken(implicit request: Request[_]): Option[CSRF.Token] = {[0m
+[0m[[0m[31merror[0m] [0m[0m                                                             ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m

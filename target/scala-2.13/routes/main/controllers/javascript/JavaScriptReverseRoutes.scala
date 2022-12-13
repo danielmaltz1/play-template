@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/Users/daniel.maltz/Desktop/play-template/conf/routes
-// @DATE:Wed Dec 07 10:10:21 GMT 2022
+// @DATE:Thu Dec 08 10:53:45 GMT 2022
 
 import play.api.routing.JavaScriptReverseRoute
 
@@ -48,12 +48,32 @@ package controllers.javascript {
       """
     )
   
+    // @LINE:21
+    def addBook: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.ApplicationController.addBook",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "newBook/form"})
+        }
+      """
+    )
+  
     // @LINE:15
     def updateByField: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.ApplicationController.updateByField",
       """
         function(id0,field1,newValue2) {
           return _wA({method:"PUT", url:"""" + _prefix + { _defaultPrefix } + """" + "api/updateByField/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("id", id0)) + "/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("field", field1)) + "/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("newValue", newValue2))})
+        }
+      """
+    )
+  
+    // @LINE:22
+    def addBookForm: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.ApplicationController.addBookForm",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "newBook/form"})
         }
       """
     )

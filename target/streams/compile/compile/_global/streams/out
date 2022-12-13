@@ -1,4 +1,13 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/daniel.maltz/Desktop/play-template/app/controllers/ApplicationController.scala:151:62: type Token is not a member of object views.html.helper.CSRF[0m
-[0m[[0m[31merror[0m] [0m[0m  def accessToken(implicit request: Request[_]): Option[CSRF.Token] = {[0m
-[0m[[0m[31merror[0m] [0m[0m                                                             ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/daniel.maltz/Desktop/play-template/app/views/example.scala.html:19:36: value get is not a member of models.DataModel[0m
+[0m[[0m[31merror[0m] [0m[0m            <th scope="row">@model.get._id</th>[0m
+[0m[[0m[31merror[0m] [0m[0m                                   ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/daniel.maltz/Desktop/play-template/app/views/example.scala.html:20:24: value get is not a member of models.DataModel[0m
+[0m[[0m[31merror[0m] [0m[0m            <td>@model.get.name</td>[0m
+[0m[[0m[31merror[0m] [0m[0m                       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/daniel.maltz/Desktop/play-template/app/views/example.scala.html:21:24: value get is not a member of models.DataModel[0m
+[0m[[0m[31merror[0m] [0m[0m            <td>@model.get.description</td>[0m
+[0m[[0m[31merror[0m] [0m[0m                       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/daniel.maltz/Desktop/play-template/app/views/example.scala.html:22:24: value get is not a member of models.DataModel[0m
+[0m[[0m[31merror[0m] [0m[0m            <td>@model.get.numSales</td>[0m
+[0m[[0m[31merror[0m] [0m[0m                       ^[0m
+[0m[[0m[31merror[0m] [0m[0mfour errors found[0m

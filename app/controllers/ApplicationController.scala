@@ -41,7 +41,7 @@ class ApplicationController @Inject()(
     //booksWithCorrectId.map(x => if (x.isEmpty) BadRequest else Ok(Json.toJson(x.head)))
     val booksWithCorrectId: Future[DataModel] = repositoryService.read(id)
     //booksWithCorrectId.map { x => Future.successful(Ok(views.html.example(Some(x))))}
-    Future.successful(Ok(views.html.example(Some(Await.result(booksWithCorrectId, Duration(100, MILLISECONDS))))))
+    Future.successful(Ok(views.html.example(Await.result(booksWithCorrectId, Duration(100, MILLISECONDS)))))
   }
 
   def readByName(name: String): Action[AnyContent] = Action.async { implicit request =>
@@ -125,8 +125,9 @@ class ApplicationController @Inject()(
     }
   }
 
-  def example(): Action[AnyContent] = Action.async { implicit request =>
-    Future.successful(Ok(views.html.example(None)))
+  def example(id: String): Action[AnyContent] = Action.async { implicit request =>
+    val book = Await.result(repositoryService.read(id), Duration(100,MILLISECONDS))
+    Future.successful(Ok(views.html.example(book)))
   }
 
   def addBook(): Action[AnyContent] = Action { implicit request =>

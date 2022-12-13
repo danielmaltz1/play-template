@@ -16,7 +16,7 @@ PUT     /api/updateByField/:id/:field/:newValue   controllers.ApplicationControl
 
 GET     /library/google/:search/:term      controllers.ApplicationController.getGoogleBook(search: String, term: String)
 
-GET     /example                           controllers.ApplicationController.example()
+GET     /example/:id                           controllers.ApplicationController.example(id: String)
 
 GET     /newBook/form     controllers.ApplicationController.addBook()
 POST     /newBook/form     controllers.ApplicationController.addBookForm()

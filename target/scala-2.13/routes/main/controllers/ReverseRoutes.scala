@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/Users/daniel.maltz/Desktop/play-template/conf/routes
-// @DATE:Thu Dec 08 10:53:45 GMT 2022
+// @DATE:Tue Dec 13 11:56:57 GMT 2022
 
 import play.api.mvc.Call
 
@@ -53,16 +53,16 @@ package controllers {
       Call("POST", _prefix + { _defaultPrefix } + "newBook/form")
     }
   
-    // @LINE:19
-    def example(): Call = {
-      
-      Call("GET", _prefix + { _defaultPrefix } + "example")
-    }
-  
     // @LINE:13
     def delete(id:String): Call = {
       
       Call("DELETE", _prefix + { _defaultPrefix } + "api/delete/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("id", id)))
+    }
+  
+    // @LINE:19
+    def example(id:String): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "example/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("id", id)))
     }
   
     // @LINE:12

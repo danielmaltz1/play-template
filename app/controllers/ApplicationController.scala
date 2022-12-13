@@ -4,11 +4,14 @@ import repositories._
 import services._
 import play.api.mvc._
 import play.api.libs.json._
+//import play.filters.csrf.CSRF
+import views.html.helper.CSRF
 
 import java.util.concurrent.TimeUnit
 import javax.inject._
 import scala.concurrent.duration.{Duration, MILLISECONDS}
 import scala.concurrent.{Await, ExecutionContext, Future}
+
 
 
 @Singleton
@@ -18,7 +21,7 @@ class ApplicationController @Inject()(
                                        repositoryService: RepositoryService,
                                        val controllerComponents: ControllerComponents
                                      )
-                                     ( implicit val ec: ExecutionContext) extends BaseController {
+                                     ( implicit val ec: ExecutionContext) extends BaseController with play.api.i18n.I18nSupport{
 
   def index(): Action[AnyContent] = Action.async { implicit request =>
     val books: Future[Seq[DataModel]] = dataRepository.collection.find().toFuture()
@@ -38,10 +41,10 @@ class ApplicationController @Inject()(
     //booksWithCorrectId.map(x => if (x.isEmpty) BadRequest else Ok(Json.toJson(x.head)))
     val booksWithCorrectId: Future[DataModel] = repositoryService.read(id)
     //booksWithCorrectId.map { x => Future.successful(Ok(views.html.example(Some(x))))}
-    Future.successful(Ok(views.html.example(Some(Await.result(booksWithCorrectId,Duration(100,MILLISECONDS))))))
+    Future.successful(Ok(views.html.example(Some(Await.result(booksWithCorrectId, Duration(100, MILLISECONDS))))))
   }
 
-  def readByName(name:String): Action[AnyContent] = Action.async { implicit request =>
+  def readByName(name: String): Action[AnyContent] = Action.async { implicit request =>
     val booksWithCorrectId: Future[Seq[DataModel]] = dataRepository.collection.find().filter(book => book.name == name).toFuture()
 
     booksWithCorrectId.map(x => if (x.isEmpty) BadRequest else Ok(Json.toJson(x.head)))
@@ -73,11 +76,11 @@ class ApplicationController @Inject()(
     val bookToChange: Future[DataModel] = repositoryService.read(id)
     val updatedBook: DataModel = field match {
       case "id" => Await.result(bookToChange.map(book => book.copy(newValue, book.name, book.description, book.numSales)), Duration(100, TimeUnit.MILLISECONDS))
-      case "name" => Await.result(bookToChange.map(book => book.copy(book._id, newValue, book.description, book.numSales)), Duration(100,TimeUnit.MILLISECONDS))
-      case "description" => Await.result(bookToChange.map(book => book.copy(book._id, book.name, newValue, book.numSales)), Duration(100,TimeUnit.MILLISECONDS))
-      case "numSales" => Await.result(bookToChange.map(book => book.copy(book._id, book.name, book.description, newValue.toInt)), Duration(100,TimeUnit.MILLISECONDS))
+      case "name" => Await.result(bookToChange.map(book => book.copy(book._id, newValue, book.description, book.numSales)), Duration(100, TimeUnit.MILLISECONDS))
+      case "description" => Await.result(bookToChange.map(book => book.copy(book._id, book.name, newValue, book.numSales)), Duration(100, TimeUnit.MILLISECONDS))
+      case "numSales" => Await.result(bookToChange.map(book => book.copy(book._id, book.name, book.description, newValue.toInt)), Duration(100, TimeUnit.MILLISECONDS))
     }
-    val updateResult: UpdateResponse = Await.result(repositoryService.update(id, updatedBook), Duration(100,TimeUnit.MILLISECONDS))
+    val updateResult: UpdateResponse = Await.result(repositoryService.update(id, updatedBook), Duration(100, TimeUnit.MILLISECONDS))
     if (updateResult.isUpdated) Future(Accepted) else Future(BadRequest)
 
   }
@@ -109,7 +112,7 @@ class ApplicationController @Inject()(
     if (updateResult.isUpdated) Accepted else BadRequest
   }*/
 
-  def delete(id:String): Action[AnyContent] = Action.async { implicit request =>
+  def delete(id: String): Action[AnyContent] = Action.async { implicit request =>
     val booksWithCorrectId: Future[DataModel] = repositoryService.read(id)
     repositoryService.delete(id)
     booksWithCorrectId.map(_ => Accepted)
@@ -124,6 +127,30 @@ class ApplicationController @Inject()(
 
   def example(): Action[AnyContent] = Action.async { implicit request =>
     Future.successful(Ok(views.html.example(None)))
+  }
+
+  def addBook(): Action[AnyContent] = Action { implicit request =>
+    Ok(views.html.newBook(DataModel.bookForm))
+  }
+
+
+  def addBookForm(): Action[AnyContent] = Action.async { implicit request =>
+    accessToken //call the accessToken method
+    DataModel.bookForm.bindFromRequest().fold( //from the implicit request we want to bind this to the form in our companion object
+      formWithErrors => {
+        //here write what you want to do if the form has errors
+        Future(BadRequest("Form creation failed"))
+      },
+      formData => {
+        //here write how you would use this data to create a new book (DataModel)
+        repositoryService.create(formData)
+        Future(Ok(Json.toJson(formData)))
+      }
+    )
+  }
+
+  private def accessToken(implicit request: Request[_]) = {
+    CSRF.getToken
   }
 
 }

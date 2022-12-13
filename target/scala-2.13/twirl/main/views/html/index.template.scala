@@ -24,7 +24,7 @@ object index extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.Html
 
 
 Seq[Any](format.raw/*2.1*/("""
-"""),_display_(/*3.2*/main("Play Scala API demo")/*3.29*/(None)/*3.35*/ {_display_(Seq[Any](format.raw/*3.37*/("""
+"""),_display_(/*3.2*/main("Play Scala API demo")/*3.29*/ {_display_(Seq[Any](format.raw/*3.31*/("""
 
 """),format.raw/*5.1*/("""<div class="container h-100 d-flex justify-content-center">
 
@@ -121,11 +121,11 @@ Seq[Any](format.raw/*2.1*/("""
 
               /*
                   -- GENERATED --
-                  DATE: 2022-12-07T10:04:40.736548
+                  DATE: 2022-12-13T10:46:54.837576
                   SOURCE: /Users/daniel.maltz/Desktop/play-template/app/views/index.scala.html
-                  HASH: e232c6a3675d2599db5db7285329c551e0b22b8f
-                  MATRIX: 722->1|818->4|845->6|880->33|894->39|933->41|961->43|3129->2181
-                  LINES: 21->1|26->2|27->3|27->3|27->3|27->3|29->5|107->83
+                  HASH: 6a3afaf2e6578323ee8a5c6ea1ffc21b7cfe4b00
+                  MATRIX: 722->1|818->4|845->6|880->33|919->35|947->37|3115->2175
+                  LINES: 21->1|26->2|27->3|27->3|27->3|29->5|107->83
                   -- GENERATED --
               */
           

@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/Users/daniel.maltz/Desktop/play-template/conf/routes
-// @DATE:Wed Dec 07 10:10:21 GMT 2022
+// @DATE:Thu Dec 08 10:53:45 GMT 2022
 
 import play.api.mvc.Call
 
@@ -35,10 +35,22 @@ package controllers {
       Call("GET", _prefix + { _defaultPrefix } + "library/google/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("search", search)) + "/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("term", term)))
     }
   
+    // @LINE:21
+    def addBook(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "newBook/form")
+    }
+  
     // @LINE:15
     def updateByField(id:String, field:String, newValue:String): Call = {
       
       Call("PUT", _prefix + { _defaultPrefix } + "api/updateByField/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("id", id)) + "/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("field", field)) + "/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("newValue", newValue)))
+    }
+  
+    // @LINE:22
+    def addBookForm(): Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "newBook/form")
     }
   
     // @LINE:19

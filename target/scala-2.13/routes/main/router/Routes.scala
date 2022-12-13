@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/Users/daniel.maltz/Desktop/play-template/conf/routes
-// @DATE:Thu Dec 08 10:53:45 GMT 2022
+// @DATE:Tue Dec 13 11:56:57 GMT 2022
 
 package router
 
@@ -52,7 +52,7 @@ class Routes(
     ("""DELETE""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/delete/""" + "$" + """id<[^/]+>""", """controllers.ApplicationController.delete(id:String)"""),
     ("""PUT""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/updateByField/""" + "$" + """id<[^/]+>/""" + "$" + """field<[^/]+>/""" + "$" + """newValue<[^/]+>""", """controllers.ApplicationController.updateByField(id:String, field:String, newValue:String)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """library/google/""" + "$" + """search<[^/]+>/""" + "$" + """term<[^/]+>""", """controllers.ApplicationController.getGoogleBook(search:String, term:String)"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """example""", """controllers.ApplicationController.example()"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """example/""" + "$" + """id<[^/]+>""", """controllers.ApplicationController.example(id:String)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """newBook/form""", """controllers.ApplicationController.addBook()"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """newBook/form""", """controllers.ApplicationController.addBookForm()"""),
     Nil
@@ -226,17 +226,17 @@ class Routes(
 
   // @LINE:19
   private[this] lazy val controllers_ApplicationController_example9_route = Route("GET",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("example")))
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("example/"), DynamicPart("id", """[^/]+""",true)))
   )
   private[this] lazy val controllers_ApplicationController_example9_invoker = createInvoker(
-    ApplicationController_0.example(),
+    ApplicationController_0.example(fakeValue[String]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.ApplicationController",
       "example",
-      Nil,
+      Seq(classOf[String]),
       "GET",
-      this.prefix + """example""",
+      this.prefix + """example/""" + "$" + """id<[^/]+>""",
       """""",
       Seq()
     )
@@ -337,8 +337,8 @@ class Routes(
   
     // @LINE:19
     case controllers_ApplicationController_example9_route(params@_) =>
-      call { 
-        controllers_ApplicationController_example9_invoker.call(ApplicationController_0.example())
+      call(params.fromPath[String]("id", None)) { (id) =>
+        controllers_ApplicationController_example9_invoker.call(ApplicationController_0.example(id))
       }
   
     // @LINE:21

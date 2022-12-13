@@ -1,5 +1,6 @@
 package controllers
 import models._
+import models.DataModel.bookForm
 import repositories._
 import services._
 import play.api.mvc._
@@ -41,7 +42,7 @@ class ApplicationController @Inject()(
     //booksWithCorrectId.map(x => if (x.isEmpty) BadRequest else Ok(Json.toJson(x.head)))
     val booksWithCorrectId: Future[DataModel] = repositoryService.read(id)
     //booksWithCorrectId.map { x => Future.successful(Ok(views.html.example(Some(x))))}
-    Future.successful(Ok(views.html.example(Some(Await.result(booksWithCorrectId, Duration(100, MILLISECONDS))))))
+    Future(Ok(Json.toJson(Await.result(booksWithCorrectId,Duration(100,MILLISECONDS)))))
   }
 
   def readByName(name: String): Action[AnyContent] = Action.async { implicit request =>
@@ -125,18 +126,19 @@ class ApplicationController @Inject()(
     }
   }
 
-  def example(): Action[AnyContent] = Action.async { implicit request =>
-    Future.successful(Ok(views.html.example(None)))
+  def example(id: String): Action[AnyContent] = Action.async { implicit request =>
+    val book = Await.result(repositoryService.read(id), Duration(100,MILLISECONDS))
+    Future.successful(Ok(views.html.example(book)))
   }
 
   def addBook(): Action[AnyContent] = Action { implicit request =>
-    Ok(views.html.newBook(DataModel.bookForm))
+    Ok(views.html.newBook(bookForm))
   }
 
 
   def addBookForm(): Action[AnyContent] = Action.async { implicit request =>
     accessToken //call the accessToken method
-    DataModel.bookForm.bindFromRequest().fold( //from the implicit request we want to bind this to the form in our companion object
+    bookForm.bindFromRequest().fold( //from the implicit request we want to bind this to the form in our companion object
       formWithErrors => {
         //here write what you want to do if the form has errors
         Future(BadRequest("Form creation failed"))

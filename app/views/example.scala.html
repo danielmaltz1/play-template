@@ -1,4 +1,4 @@
-@(model: Option[DataModel])
+@(model: DataModel)
 @main("Find Book"){
 <h1>Google Book Api Project</h1>
 
@@ -16,10 +16,10 @@
         </thead>
         <tbody>
         <tr>
-            <th scope="row">@model.get._id</th>
-            <td>@model.get.name</td>
-            <td>@model.get.description</td>
-            <td>@model.get.numSales</td>
+            <th scope="row">@model._id</th>
+            <td>@model.name</td>
+            <td>@model.description</td>
+            <td>@model.numSales</td>
         </tr>
 
         </tbody>
